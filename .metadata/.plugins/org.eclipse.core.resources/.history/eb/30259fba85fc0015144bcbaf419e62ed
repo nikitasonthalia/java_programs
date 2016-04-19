@@ -1,0 +1,39 @@
+package data_structure;
+
+public class Core_Queue {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyQueue q=new MyQueue(5);
+		q.push(1);
+		q.push(2);
+		q.push(3);
+		System.out.println(q.pop());
+		System.out.println(q.pop());
+	}
+}
+
+class MyQueue
+{
+	int first;
+	int top;
+	int max;
+	Object data[];
+	public MyQueue(int no) {
+		// TODO Auto-generated constructor stub
+		max=no;
+		top=-1;
+		data=new Object[max];
+		first=0;
+	}
+	
+	void push(Object value)
+	{
+		data[++top]=value;
+	}
+	
+	Object pop()
+	{
+		return data[first++];
+	}
+}

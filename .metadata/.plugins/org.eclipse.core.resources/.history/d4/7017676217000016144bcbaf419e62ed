@@ -1,0 +1,31 @@
+package data_structure;
+
+import java.lang.reflect.Array;
+import java.util.Stack;
+
+
+
+public class ExpEval {
+	
+	public static float evalute(String exp)
+	{
+		String[] token = exp.split("");
+		Stack values = new Stack();
+		Stack op=	new Stack();
+		
+		
+		System.out.println(token);
+		return 0;
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(evalute("2+1"));
+		
+		
+		
+		
+	}
+
+}

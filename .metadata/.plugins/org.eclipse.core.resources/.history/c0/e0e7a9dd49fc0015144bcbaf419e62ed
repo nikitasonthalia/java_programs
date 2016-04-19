@@ -1,0 +1,437 @@
+package data_structure;
+
+
+public class Core_Linklist {
+	
+	
+	public static void main(String[] args) {
+		
+		
+		// TODO Auto-generated method stub
+
+		MyLinklist l = new MyLinklist();
+		MyLinklist ll=new MyLinklist();
+		MyLinklist intersection=new MyLinklist();
+		MyLinklist union = new MyLinklist();
+		
+		l.add("String");
+		l.add("boleen");
+		l.add("int");
+		l.addFirst("First");
+		l.add("ww");
+		l.add("one",1);
+		l.add("two",2);
+		l.add("seven", 7);
+		
+		ll.add("one");
+		ll.add("two");
+		ll.add("three");
+		ll.add("four");
+		ll.add("six");
+		ll.addFirst("ww");
+		
+		//System.out.println(l.Length());
+		//ListIterator<String> i = l.listIterator();
+		//l.values();
+		System.out.println("---------first-------");
+		//l.delete(2);
+		l.values();
+		//System.out.println("---------second------");
+		//ll.values();
+		//System.out.println(l.get(8));
+		
+		//System.out.println("---------");
+		//l.set(5, "five");
+		//l.values();
+	/*	System.out.println("---------INTERSECTION--------");
+		
+		intersection = l.intersection(ll);
+		intersection.values();
+		
+		System.out.println("---------union--------");
+		union=l.union(ll);
+		union.values();
+		
+		System.out.println("---------delete n&m--------");
+	
+		
+		l.delete(2, 2);
+		l.values();
+	*/
+		System.out.println("---------reverse--------");
+		l.reverse();
+		//l.values();
+	}
+
+}
+
+class Node
+{
+	Node next;
+	Object data;
+	Node()
+	{
+		
+		
+	}
+	
+	Node(Object datavalue)
+	{
+		next=null;
+		data=datavalue;
+	}
+	Node(Object datavalue, Node node)
+	{
+		next=node;
+		data=datavalue;
+
+	}
+	
+	void setNext(Node node)
+	{
+		next=node;
+	}
+	Node getNext()
+	{
+		return next;
+	}
+	
+	Object getValue()
+	{
+		return data;
+	}
+	
+	void setValue(Object data1)
+	{
+		data=data1;
+	}
+}
+
+
+class MyLinklist{
+	Node first;
+	int pointer;
+	
+	MyLinklist()
+	{
+		//first=new Node();
+		
+		
+	}
+	
+	void add(Object data)
+	{
+		if(first==null)
+		{
+			first=new Node(data);
+			//System.out.print("1");
+			pointer++;
+			return;
+		}
+		
+		Node temp=new Node(data);
+		Node head=first;
+		if(head!=null){
+			
+		
+			while(head.getNext() != null)
+			{
+				head=head.getNext();
+			}
+			head.setNext(temp);
+			pointer++;
+		}
+		
+	}
+	public void add(Object data, int index)
+	{
+		  if(index>1 && index<=pointer)
+		  {
+			  Node temp=new Node(data);
+			  Node head=first;
+			   for(int i=2;i<index;i++)
+			   {
+				   head=head.getNext();
+			   }
+			   
+			   temp.setNext(head.getNext());
+			   head.setNext(temp);
+			   pointer++;
+			   
+		  }
+		  if(index==1){
+			  Node temp=new Node(data);
+			  Node head=first;
+			  first=temp;
+			  temp.setNext(head);
+			  pointer++;
+		  }
+	}
+
+	public void addFirst(Object data)
+	{
+		Node temp=new Node(data);
+		Node head= first;
+		first=temp;
+		first.setNext(head);
+				pointer++;
+	
+	
+	
+	
+	}
+	void delete()
+	{
+		first=first.getNext();
+		pointer--;
+	}
+	void delete(int index)
+	{
+		if(index<=pointer && index>1)
+		{
+			Node pre=first;
+			Node curr=first;
+			for(int i=1;i<index;i++)
+			{
+				pre=curr;
+				curr=curr.getNext();
+			}
+			pre.setNext(curr.getNext());
+			pointer--;
+		}
+		if(index==1)
+		{
+			first=first.getNext();
+			pointer--;
+		}
+	}
+	public void values()
+	{
+		Node temp= first;
+		while(temp!=null)
+		{
+			//System.out.println("1");
+			System.out.println(temp.getValue());
+			temp=temp.getNext();
+		}
+		
+	}
+	int Length()
+	{
+		return pointer;
+	}
+	
+	Object get(int index)
+	{
+		Object xx=null;
+		Node cur=first;
+		if(index>0 && index<=pointer)
+		{
+			
+			for(int i=1;i<index;i++)
+			{
+				cur=cur.getNext();
+				
+			}
+			return cur.getValue();
+		}
+		
+		return xx;
+	}
+	
+	void set(int index, Object data)
+	{
+		
+		Node cur=first;
+		if(index>0 && index<=pointer)
+		{
+			
+			for(int i=1;i<index;i++)
+			{
+				cur=cur.getNext();
+				
+			}
+			cur.setValue(data);
+		}
+		
+	}
+	
+	MyLinklist intersection(MyLinklist link)
+	{
+		Node cur=first;
+		Node link_cur= link.first;
+		MyLinklist linklist=new MyLinklist();
+		
+		while(cur!=null)
+		{
+			//System.out.println("cur value--"+cur.getValue());
+			link_cur=link.first;
+			while(link_cur!=null)
+			{
+				//System.out.println(link_cur.getValue());
+				
+				if(link_cur.getValue()==cur.getValue())
+				{
+					
+					Node temp=new Node(cur.getValue());
+					if(linklist.first==null)
+					{
+						linklist.first=new Node(cur.getValue());
+					}
+					else
+					{
+						Node head = linklist.first;
+						while(head.getNext()!=null)
+						{
+							head=head.getNext();
+						}
+						head.setNext(temp);
+					}
+					
+				}
+				link_cur=link_cur.getNext();
+			}
+			cur = cur.getNext();
+		}
+		return linklist;
+	}
+	
+	
+	MyLinklist union(MyLinklist link)
+	{
+		Node cur = first;
+		Node link_cur=link.first;
+		MyLinklist linklist=new MyLinklist();
+		
+		while(cur!=null)
+		{
+			Node temp=new Node(cur.getValue());
+			if(linklist.first==null)
+			{
+				linklist.first=new Node(cur.getValue());
+			}
+			else
+			{
+				
+				Node head=linklist.first;
+				while(head.getNext()!=null)
+				{
+					head=head.getNext();
+				}
+				head.setNext(temp);
+			}
+			cur=cur.getNext();
+		}
+		
+		while(link_cur!=null)
+		{
+			Node temp=new Node(link_cur.getValue());
+			Node head = linklist.first;
+			Node pre=head;
+			int flag=0;
+			while(head!=null)
+			{
+				if(head.getValue()==link_cur.getValue())
+				{
+					flag=1;
+					break;
+				}
+				pre=head;
+				head=head.getNext();
+				
+			}
+			if(flag==0)
+			{
+				pre.setNext(temp);
+			}
+			link_cur=link_cur.getNext();
+		}
+		return linklist;
+	}
+	
+	void delete(int n, int m) // n is starting point ; m is no.of nodes to be delete
+	{
+		Node cur=first;
+		if(n>=1 && n<=pointer && (n+m)<=pointer)
+		{
+			for(int i=1;i<n;i++)
+			{
+				cur=cur.getNext();
+			}
+			for(int i=1;i<=m;i++)
+			{
+				cur.setNext(cur.getNext().getNext());
+				pointer--;
+				//cur=cur.getNext();
+			}
+		}
+		
+		
+	}
+	
+	void reverse()
+	{
+//		System.out.println(pointer);
+//		int len=pointer;
+//		Node cur=first;
+//		while (len>0)
+//		{
+//			int i=1;
+//			cur=first;
+//			//System.out.println(len);
+//			while(cur.getNext()!=null && i<len)
+//			{
+//				//System.out.println(i);
+//				cur=cur.getNext();
+//				i++;
+//			}
+//			System.out.println(cur.getValue());
+//			len--;
+//		}
+		MyLinklist link=new MyLinklist()  ;
+		link.first = reverserecurion(first);
+		link.values();
+	}
+	 Node reverserecurion(Node cur)
+	 {
+		// MyLinklist link=new MyLinklist();
+		Node head=null;
+		 if(cur==null)
+		 {
+			return null;
+		 }
+		reverserecurion(cur.getNext());
+//		Node temp=new Node(cur.getValue());
+//		temp.setNext(temp);
+//		return temp;
+		
+		head.setNext(new Node(cur.getValue()));
+		
+		return head;
+//		 if(head==null)
+//		 {
+//			 System.out.println("1");
+//			head=new Node(cur.getValue());
+//		 }
+//		 else
+//		 {
+//			 System.out.println("2");
+//			 Node c=first;
+//			 Node temp=new Node(cur.getValue());
+//			 while(c.getNext()!=null)
+//			 {
+//				 c=c.getNext();
+//			 }
+//			 c.setNext(temp);
+//		 }
+//		 return head;
+		 //System.out.println(cur.getValue());
+	 }
+
+}
+
+
+
+
+ 
+

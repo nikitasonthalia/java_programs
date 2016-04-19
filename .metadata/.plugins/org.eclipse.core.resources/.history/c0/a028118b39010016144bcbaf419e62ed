@@ -1,0 +1,128 @@
+package data_structure;
+
+public class Core_Deque {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyDeque d=new MyDeque();
+		d.addrear(22);
+		d.addrear(44);
+		d.addFront(55);
+		d.addFront(66);
+		d.addrear(11);
+		d.deleteFront();
+		d.display();
+		System.out.println("-----------");
+		d.deleteRear();
+		d.display();
+		System.out.println("-----------");
+		d.deleteRear();
+		d.display();System.out.println("-----------");
+		d.deleteRear();
+		d.display();System.out.println("-----------");
+		d.deleteRear();
+		d.display();
+	}
+
+}
+
+class MyDeque
+{
+	int front,rear,size;
+	int data[];//=new int[]();
+	MyDeque()
+	{
+		data=new int[90];
+		front=rear=-1;
+		size=0;
+	}
+	
+	void addrear(int no)
+	{
+		int tmp;
+		if(rear==-1)
+		{
+			data[++rear]=no;
+			front++;
+		}
+		else
+		{
+			tmp=front+1;
+			for(int i=front;i>=rear;i--)
+			{
+				
+				data[tmp--]=data[i];
+				
+			}
+			data[rear]=no;
+			size++;
+			front++;		
+		}
+		
+	}
+	void display()
+	{
+		for(int i=rear;i<=front;i++)
+		{
+			System.out.println(data[i]);
+		}
+	}
+	
+	void addFront(Object no)
+	{
+		data[++front]=(int) no;
+	}
+	
+	int deleteRear()
+	{
+		if(rear>front||rear==-1)
+		{
+			System.out.println("empty queue");
+		}
+		else
+		{
+			if(rear==front)
+			{
+				int no = data[rear];
+				
+				rear=front=-1;
+				return  no;
+			}
+			else
+			{
+				return data[rear++];
+				
+			}
+			
+		}
+		return 0;
+		
+	}
+	int deleteFront()
+	{
+		if(front<rear || front==-1)
+		{
+			System.out.println("empty queue");
+		}
+		else
+		{
+			if(rear==front)
+			{
+				int no = data[front];
+				
+				rear=front=-1;
+				return  no;
+			}
+			else
+			{
+				return data[front--];
+				
+			}
+			
+		}
+		return 0;
+		
+	}
+	
+	
+}

@@ -1,0 +1,43 @@
+package data_structure;
+
+public class core_stack {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		MyStack s=new MyStack(5);
+		s.push(2);
+		s.push(3);
+		System.out.println(s);
+
+	}
+
+}
+
+class MyStack
+{
+	Object data[];
+	int max;
+	int top;
+	
+	public MyStack(int no) {
+		max=no;
+		data=new Object[max];
+		top=-1;
+		
+	}
+	
+	void push(Object value)
+	{
+		data[++top]=value;
+	}
+	
+	Object pop()
+	{
+		return data[top--];
+	}
+	
+	
+	
+	
+}

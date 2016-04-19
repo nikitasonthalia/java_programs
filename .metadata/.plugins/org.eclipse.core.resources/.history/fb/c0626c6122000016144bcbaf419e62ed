@@ -1,0 +1,108 @@
+package data_structure;
+
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+
+
+public class ExpEval {
+	
+		
+	public static float evalute(String exp)
+	{
+		String[] token = exp.split("");
+		Stack values = new Stack();
+		Stack op=	new Stack();
+		int i=0;
+		
+		while(i<token.length)
+		{
+			if(token[i].matches("\\d"))
+			{
+				String s= "";
+				while(i<token.length && token[i].matches("\\d"))
+				{
+					s=s+token[i++];
+					System.out.println("--"+s); //2 22
+					System.out.println(token[i]); //2 *
+					
+				}
+				values.push(Integer.parseInt(s));
+			}
+			else if(token[i].equals("("))
+			{
+				op.push(token[i]);
+			}
+			else if(token[i].equals(")"))
+			{
+				while(!op.peek().equals("("))
+				{
+					int val=exp(Integer.parseInt((String) values.pop()),op.pop().toString(),Integer.parseInt((String) values.pop()));
+					values.push(val);
+				}
+				
+			}
+//			else if(token[i].matches("[*,/,+,-]") && hasPrecedance(op.peek().toString(),token[i].toString()) && !op.isEmpty())
+//			{
+//				
+//			}
+			
+			
+			
+			i++;
+		}
+//		for(int j=0; j<token.length;j++)
+//			System.out.println(token[j]);
+		return 0;
+		
+	}
+	
+	private static boolean hasPrecedance(String op1, String op2) 
+	{
+		
+		Map <String, Integer> priorities = new HashMap<String, Integer>();
+		priorities.put("^", 3);
+		priorities.put("/", 2);
+		priorities.put("*", 2);
+		priorities.put("+", 1);
+		priorities.put("-", 1);
+		priorities.put("#", 0);
+		// TODO Auto-generated method stub
+		
+		if(priorities.get(op1) >= priorities.get(op2))
+			return true;
+		else
+			return false;
+	}
+
+	public static int exp(int op1,String op, int op2)
+	{
+		switch(op)
+		{
+		case "+":
+			return op1+op2;
+		case "-":
+			return op1-op2;
+		case "*":
+			return op1*op2;
+		case "/":
+			return op1/op2;
+		}
+		return 0 ;
+		
+	}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(evalute("22*1+2"));
+		
+		
+		//System.out.println(hasPrecedance("/", "+"));
+		
+		
+	}
+
+}

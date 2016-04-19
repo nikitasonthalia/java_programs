@@ -1,0 +1,21 @@
+package data_structure;
+
+public class Core_Deque {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+class MyDeque
+{
+	int front,rear;
+	Object data[];
+	MyDeque()
+	{
+		data=(Object[]) new Object();
+		front=rear=-1;
+	}
+}

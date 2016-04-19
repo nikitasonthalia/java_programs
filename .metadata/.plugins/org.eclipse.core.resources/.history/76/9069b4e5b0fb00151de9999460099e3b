@@ -1,0 +1,203 @@
+package data_structure;
+
+
+public class Core_Linklist {
+	
+	
+	public static void main(String[] args) {
+		
+		
+		// TODO Auto-generated method stub
+
+		MyLinklist l = new MyLinklist();
+		
+		l.add("String");
+		l.add("boleen");
+		l.add("int");
+		l.addFirst("First");
+		l.add("ww");
+		l.add("one",1);
+		l.add("two",2);
+		l.add("seven", 7);
+		
+		
+		System.out.println(l.Length());
+		//ListIterator<String> i = l.listIterator();
+		l.values();
+		System.out.println("---------");
+		l.delete(8);
+		l.values();
+		System.out.println("---------");
+		System.out.println(l.get(1));
+		
+		
+	}
+
+}
+
+class Node{
+	Node next;
+	Object data;
+	Node()
+	{
+		
+		
+	}
+	
+	Node(Object datavalue)
+	{
+		next=null;
+		data=datavalue;
+	}
+	Node(Object datavalue, Node node)
+	{
+		next=node;
+		data=datavalue;
+
+	}
+	
+	void setNext(Node node)
+	{
+		next=node;
+	}
+	Node getNext()
+	{
+		return next;
+	}
+	
+	Object getValue()
+	{
+		return data;
+	}
+}
+
+class MyLinklist{
+	Node first;
+	int pointer;
+	
+	MyLinklist()
+	{
+		//first=new Node();
+		
+		
+	}
+	
+	void add(Object data)
+	{
+		if(first==null)
+		{
+			first=new Node(data);
+			//System.out.print("1");
+			pointer++;
+			return;
+		}
+		
+		Node temp=new Node(data);
+		Node head=first;
+		if(head!=null){
+			
+		
+			while(head.getNext() != null)
+			{
+				head=head.getNext();
+			}
+			head.setNext(temp);
+			pointer++;
+		}
+		
+	}
+	public void add(Object data, int index)
+	{
+		  if(index>1 && index<=pointer)
+		  {
+			  Node temp=new Node(data);
+			  Node head=first;
+			   for(int i=2;i<index;i++)
+			   {
+				   head=head.getNext();
+			   }
+			   
+			   temp.setNext(head.getNext());
+			   head.setNext(temp);
+			   pointer++;
+			   
+		  }
+		  if(index==1){
+			  Node temp=new Node(data);
+			  Node head=first;
+			  first=temp;
+			  temp.setNext(head);
+			  pointer++;
+		  }
+	}
+
+	public void addFirst(Object data)
+	{
+		Node temp=new Node(data);
+		Node head= first;
+		first=temp;
+		first.setNext(head);
+				pointer++;
+	
+	
+	
+	
+	}
+	void delete()
+	{
+		first=first.getNext();
+		pointer--;
+	}
+	void delete(int index)
+	{
+		if(index<=pointer && index>1)
+		{
+			Node pre=first;
+			Node curr=first;
+			for(int i=2;i<=index;i++)
+			{
+				pre=curr;
+				curr=curr.getNext();
+			}
+			pre.setNext(curr.getNext());
+			pointer--;
+		}
+		if(index==1)
+		{
+			first=first.getNext();
+			pointer--;
+		}
+	}
+	public void values()
+	{
+		Node temp= first;
+		while(temp!=null)
+		{
+			//System.out.println("1");
+			System.out.println(temp.getValue());
+			temp=temp.getNext();
+		}
+		
+	}
+	int Length()
+	{
+		return pointer;
+	}
+	
+	Object get(int index)
+	{
+		Node cur=first;
+		if(index>0 && index<=pointer)
+		{
+			
+			for(int i=1;i<index;i++)
+			{
+				cur=cur.getNext();
+				
+			}
+			
+		}
+		
+		return cur.getValue();
+	}
+}

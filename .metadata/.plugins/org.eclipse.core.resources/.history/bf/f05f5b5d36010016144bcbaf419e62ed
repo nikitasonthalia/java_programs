@@ -1,0 +1,58 @@
+package data_structure;
+
+public class Core_Deque {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyDeque d=new MyDeque();
+		d.addrear(22);
+		d.addrear(44);
+		d.display();
+	}
+
+}
+
+class MyDeque
+{
+	int front,rear,size;
+	int data[];//=new int[]();
+	MyDeque()
+	{
+		data=new int[90];
+		front=rear=-1;
+		size=0;
+	}
+	
+	void addrear(int no)
+	{
+		int tmp;
+		if(rear==-1)
+		{
+			data[++rear]=no;
+			front++;
+		}
+		else
+		{
+			for(int i=front;i>=0;i--)
+			{
+				System.out.println(i);
+				data[++i]=data[i];
+				
+			}
+			data[0]=no;
+			size++;
+			front++;		
+		}
+		
+	}
+	void display()
+	{
+		for(int i=rear;i<=front;i++)
+		{
+			System.out.println(data[i]);
+		}
+	}
+	
+	
+	
+}

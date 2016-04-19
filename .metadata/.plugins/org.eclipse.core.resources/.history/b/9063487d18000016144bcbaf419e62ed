@@ -1,0 +1,40 @@
+package data_structure;
+
+import java.lang.reflect.Array;
+import java.util.Stack;
+
+
+
+public class ExpEval {
+	
+	public static float evalute(String exp)
+	{
+		String[] token = exp.split("");
+		Stack values = new Stack();
+		Stack op=	new Stack();
+		int i=0;
+		
+		while(i<token.length)
+		{
+			if(token[i].matches("\\d\""))
+			{
+				System.out.println(token[i]);
+			}
+			
+		}
+//		for(int i=0; i<token.length;i++)
+//			System.out.println(token[i]);
+//		return 0;
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(evalute("2+1"));
+		
+		
+		
+		
+	}
+
+}
