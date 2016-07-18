@@ -1,0 +1,72 @@
+package data_structure;
+
+import java.util.Stack;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
+public class SlidingWindow {
+	
+	public void maxInWindow(int k, int[] v, int len)
+	{
+		Stack<Integer> s=new Stack<Integer>();
+		for(int i=0; i<k;i++)
+		{
+			if(s.isEmpty())
+			{
+				s.push(i);
+			}
+			else
+			{
+				int max=s.peek();
+				if(v[max]<v[i])
+				{
+					int no=s.pop();
+					s.push(i);
+				}
+			}
+		}
+		for(int i=k;i<len;i++)
+		{
+			System.out.println(v[s.peek()]);
+			
+			
+			int max=s.peek();
+			if(max<=i-k)
+			{
+				//System.out.println("i in remove"+max);
+				int no=s.pop();
+				
+			}
+			
+			if(s.isEmpty())
+			{
+				s.push(i);
+			}
+			else
+			{
+				max=s.peek();
+				if(v[max]<v[i])
+				{
+					int no=s.pop();
+					s.push(i);
+				}
+			}
+			
+		}
+		System.out.println(v[s.peek()]);
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int[] v = {12,1,78,90,57,89,56};
+		SlidingWindow s=new SlidingWindow();
+		s.maxInWindow(3, v, 7);
+		
+	}
+	
+	
+
+}
+
